@@ -131,7 +131,52 @@ If the slow blink doesn't thrill you, change the delay time. If you set it for 1
 
 **How could you make multiple LEDs blink at the same time?**
 
+Now that we know how to make a light blink, what if we wanted to make a lot of lights blink? All we have to do is get power to them to turn on and off regularly. Easy, right? 
 
+It is. 
+
+**STEP 1**  
+
+For this, we're going to run power into the power channels on your breadboard. So take a black jumper wire and plug it in to the negative channel on your breadboard, and a red jumper wire into to the postive channel on the breadboard.
+
+**STEP 2**
+
+Plug the red jumper wire into digital pin 13 and the black jumper wire into the GND pin. 
+
+![arduino-blink-6](images/arduino-blink-6.jpg)
+
+**STEP 3** 
+
+Plug three LEDs into column e, with anode (long) pins in rows 1, 3 and 5. 
+
+![arduino-blink-7](images/arduino-blink-7.jpg)
+
+
+**STEP 4** 
+
+Plug red jumper wires into rows 1, 3 and 5 -- your anode rows -- and connect them to the postive channel on the breadboard. It doesn't matter where in the positive channel you plug them in -- they're all the same. 
+
+![arduino-blink-8](images/arduino-blink-8.jpg)
+
+**STEP 5**
+
+Plug black jumper wires into rows 2, 4 and 6 -- your cathode rows -- and connect them to the negative channel on your breadboard. It doesn't matter where in the negative channel you plug them in -- they're all the same. 
+
+![arduino-blink-9](images/arduino-blink-9.jpg)
+
+**STEP 6**
+
+Plug your Arduino board into your USB port, open the Arduino IDE if you don't already have it open. The blink sketch you used before should work. If it was the last thing you ran on the board, your LEDs should start blinking. 
+
+![arduino-blink-10](images/arduino-blink-10.jpg)
+
+###What did we learn?###
+
+* How to upload a sketch to an Arduino board.
+* What the parts of an LED are.
+* How to connect a breadboard to an Arduino.
+* How to create a simple curcuit with an LED.
+* How to create a more involved, but no less simple, circuit with multiple LEDs. 
 
 ## Spark Core/Electron
 
