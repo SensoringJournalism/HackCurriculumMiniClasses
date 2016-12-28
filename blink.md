@@ -7,7 +7,15 @@ One of the simplest things you can do with electronics is to blink an LED.
 
 ## Arduino
 
-Blinking a light on a Arduino could not be any simpler. You just plug in the board and upload this code to the board. 
+Blinking a light on a Arduino could not be any simpler. 
+
+1. Plug in the board to your USB board. 
+2. Boot up the Arduino IDE
+3. Either copy this code to a blank sketch and save it or go to File > Examples > 01.Basics > Blink
+4. Click upload (the arrow pointed to the right). 
+5. Marvel at the small LED on the board blinking every second. 
+
+The code: 
 
 ```
 */
@@ -42,11 +50,88 @@ void loop() {
 
 ### Taking it further###
 
-How would you use an external LED instead of the internal?
+**How would you use an external LED instead of the internal?**
 
-### Stretch goal###
+That LED is awfully tiny, and kind of an industrial orange. So let's use our own LED and walk through the basics of a circuit while we're at it. 
 
-How could you make multiple LEDs blink at the same time?
+We need a breadboard, so grab yours. Place it to the right of the Arduino. To do this, we'll also need a red and black jumper wire and an LED.
+
+![arduino-blink-1](images/arduino-blink-1.jpg)
+
+Let's take a look at the LED. It's a very simple device that emits light. You'll notice one wire is longer than the other -- that's the positive, or anode, wire. The shorter one is the negative, or cathode, wire. 
+
+**STEP 1**  
+
+Take the anode wire -- the longer one -- and put it into our breadboard in column e row 1. The cathode wire will go into column e row 2. 
+
+![arduino-blink-2](images/arduino-blink-2.jpg)
+
+**STEP 2**
+
+Take a black jumper wire and plug it into anywhere in row 2 to the left of column e.
+
+**STEP 3**
+
+Take a red jumper wire and plug it into anywhere in row 1 to the left of column e. 
+
+![arduino-blink-3](images/arduino-blink-3.jpg)
+
+**STEP 4**
+
+Plug the red jumper wire into digital pin 13 or the highest digital pin you have on your board. You'll know it's a digital pin if there isn't an A in front of it (A pins are analog). 
+
+**STEP 5**
+
+Plug the black jumper wire into a GND pin. On many Ardunio boards, there's one immediately above the digital 13 pin. 
+
+![arduino-blink-4](images/arduino-blink-4.jpg)
+
+**STEP 6**
+
+Plug your Arduino board into your USB port, open the Arduino IDE if you don't already have it open. The blink sketch you used before should work. If it was the last thing you ran on the board, your LED should start blinking. 
+
+![arduino-blink-5](images/arduino-blink-5.jpg)
+
+**WHY DID THAT WORK?**
+
+That worked because the LED built into the board is on the same pin as digital 13. Our blink sketch just said turn pin 13 on for a second, and then turn it off for a second. It didn't care what was on pin 13. So we just tapped into it. But let's take a closer look here. 
+
+If we look at our blink sketch, the first bit of code you see is this
+
+```int led = 13;```
+
+What that does is create a variable called "led" that is associated with the integer 13. Do we absolutely have to do this? No. We could just tell it what pin we want later. This is just helpful to keep track of things. 
+
+Every sketch has two main parts: A setup and a loop. Let's look at the setup. 
+
+```
+void setup() {                
+  pinMode(led, OUTPUT);
+}
+```
+
+This just very simply tells the board that pin 13 (see our led variable there?) will be set to output, instead of input. 
+
+In any sketch, the loop is where most of the work is getting done. It works like any other programming loop -- you can interrupt them, break out of them, or let them run on forever. 
+
+```
+void loop() {
+  digitalWrite(led, HIGH);  
+  delay(1000); 
+  digitalWrite(led, LOW);
+  delay(1000);
+  }
+```
+
+You can pretty much see what this does: Send output (electricity) to our led. Then wait for 1000 milliseconds, or one second. Then, turn off that electricity to the led and wait another second. Then, repeat it. Forever.
+
+If the slow blink doesn't thrill you, change the delay time. If you set it for 10 milliseconds, it will blink so fast you can't easily see it. Change the values and hit upload. 
+
+### Stretch goal: More than one LED###
+
+**How could you make multiple LEDs blink at the same time?**
+
+
 
 ## Spark Core/Electron
 
