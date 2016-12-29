@@ -170,6 +170,42 @@ Plug your Arduino board into your USB port, open the Arduino IDE if you don't al
 
 ![arduino-blink-10](../images/arduino-blink-10.jpg)
 
+**WHY DID THAT WORK?**
+
+Simply put, we used the power channel for what it's for -- to run power through it. Normally, you'd just run power into it, not blink it on and off, but for our purposes, it worked. Each light was tapped into the same power channel, so you could pull one out and the others would still work. 
+
+If we wanted to make each light blink independently, we would just have to put each light on a different pin, and our code would repeat for as many times as we had LEDs. We'd set up each LED pin we used, and in our loop block, we would change the LED variable to match which LED we were blinking. 
+
+That code would look like this:
+
+```
+int led1 = 13;
+int led2 = 12;
+int led3 = 11;
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);  
+}
+
+void loop() {
+  digitalWrite(led1, HIGH);   
+  delay(1000);
+  digitalWrite(led1, LOW);
+  delay(1000);
+  digitalWrite(led2, HIGH);   
+  delay(1000);
+  digitalWrite(led2, LOW);
+  delay(1000);
+  digitalWrite(led3, HIGH);   
+  delay(1000);
+  digitalWrite(led3, LOW);
+  delay(1000);
+}
+
+```
+
 ###What did we learn?###
 
 * How to upload a sketch to an Arduino board.

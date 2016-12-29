@@ -10,7 +10,7 @@ These are the mini-courses planned for each sensor and platform. Progress will b
 |File|Arduino|Particle|RasPi|
 |----|-------|-----|-----|
 |Basics|||||
-|Blink|X|||
+|Blink|X|X||
 |PIR||||
 |Temperature||||
 |Light||||
