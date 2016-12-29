@@ -7,7 +7,7 @@ In this repository will be exercises covering blinking lights, passive infrared 
 
 These are the mini-courses planned for each sensor and platform. Progress will be noted with an X for which ones are done. 
 
-|File|Arduino|Spark|RasPi|
+|File|Arduino|Particle|RasPi|
 |----|-------|-----|-----|
 |Basics|||||
 |Blink|X|||

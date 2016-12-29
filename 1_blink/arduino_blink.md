@@ -2,7 +2,7 @@
 
 ### The Hello World of Electronics
 
-One of the simplest things you can do with electronics is to blink an LED. 
+One of the simplest things you can do with electronics is to make an LED blink on and off. 
 
 
 ## Arduino
@@ -56,7 +56,7 @@ That LED is awfully tiny, and kind of an industrial orange. So let's use our own
 
 We need a breadboard, so grab yours. Place it to the right of the Arduino. To do this, we'll also need a red and black jumper wire and an LED.
 
-![arduino-blink-1](images/arduino-blink-1.jpg)
+![arduino-blink-1](../images/arduino-blink-1.jpg)
 
 Let's take a look at the LED. It's a very simple device that emits light. You'll notice one wire is longer than the other -- that's the positive, or anode, wire. The shorter one is the negative, or cathode, wire. 
 
@@ -64,7 +64,7 @@ Let's take a look at the LED. It's a very simple device that emits light. You'll
 
 Take the anode wire -- the longer one -- and put it into our breadboard in column e row 1. The cathode wire will go into column e row 2. 
 
-![arduino-blink-2](images/arduino-blink-2.jpg)
+![arduino-blink-2](../images/arduino-blink-2.jpg)
 
 **STEP 2**
 
@@ -74,7 +74,7 @@ Take a black jumper wire and plug it into anywhere in row 2 to the left of colum
 
 Take a red jumper wire and plug it into anywhere in row 1 to the left of column e. 
 
-![arduino-blink-3](images/arduino-blink-3.jpg)
+![arduino-blink-3](../images/arduino-blink-3.jpg)
 
 **STEP 4**
 
@@ -84,13 +84,13 @@ Plug the red jumper wire into digital pin 13 or the highest digital pin you have
 
 Plug the black jumper wire into a GND pin. On many Ardunio boards, there's one immediately above the digital 13 pin. 
 
-![arduino-blink-4](images/arduino-blink-4.jpg)
+![arduino-blink-4](../images/arduino-blink-4.jpg)
 
 **STEP 6**
 
 Plug your Arduino board into your USB port, open the Arduino IDE if you don't already have it open. The blink sketch you used before should work. If it was the last thing you ran on the board, your LED should start blinking. 
 
-![arduino-blink-5](images/arduino-blink-5.jpg)
+![arduino-blink-5](../images/arduino-blink-5.jpg)
 
 **WHY DID THAT WORK?**
 
@@ -143,32 +143,32 @@ For this, we're going to run power into the power channels on your breadboard. S
 
 Plug the red jumper wire into digital pin 13 and the black jumper wire into the GND pin. 
 
-![arduino-blink-6](images/arduino-blink-6.jpg)
+![arduino-blink-6](../images/arduino-blink-6.jpg)
 
 **STEP 3** 
 
 Plug three LEDs into column e, with anode (long) pins in rows 1, 3 and 5. 
 
-![arduino-blink-7](images/arduino-blink-7.jpg)
+![arduino-blink-7](../images/arduino-blink-7.jpg)
 
 
 **STEP 4** 
 
 Plug red jumper wires into rows 1, 3 and 5 -- your anode rows -- and connect them to the postive channel on the breadboard. It doesn't matter where in the positive channel you plug them in -- they're all the same. 
 
-![arduino-blink-8](images/arduino-blink-8.jpg)
+![arduino-blink-8](../images/arduino-blink-8.jpg)
 
 **STEP 5**
 
 Plug black jumper wires into rows 2, 4 and 6 -- your cathode rows -- and connect them to the negative channel on your breadboard. It doesn't matter where in the negative channel you plug them in -- they're all the same. 
 
-![arduino-blink-9](images/arduino-blink-9.jpg)
+![arduino-blink-9](../images/arduino-blink-9.jpg)
 
 **STEP 6**
 
 Plug your Arduino board into your USB port, open the Arduino IDE if you don't already have it open. The blink sketch you used before should work. If it was the last thing you ran on the board, your LEDs should start blinking. 
 
-![arduino-blink-10](images/arduino-blink-10.jpg)
+![arduino-blink-10](../images/arduino-blink-10.jpg)
 
 ###What did we learn?###
 
@@ -177,7 +177,3 @@ Plug your Arduino board into your USB port, open the Arduino IDE if you don't al
 * How to connect a breadboard to an Arduino.
 * How to create a simple curcuit with an LED.
 * How to create a more involved, but no less simple, circuit with multiple LEDs. 
-
-## Spark Core/Electron
-
-## Raspberry Pi
