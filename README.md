@@ -11,8 +11,8 @@ These are the mini-courses planned for each sensor and platform. Progress will b
 |----|-------|-----|-----|
 |Basics|||||
 |Blink|X|X|X|
-|PIR||||
 |Temperature||||
+|PIR||||
 |Light||||
 |GPS||||
 |Air||||
