@@ -26,8 +26,12 @@ The exercises that make up this mini-course in sensors for journalism will use t
 ##Raspberry Pi
 
 * A Raspberry Pi (model doesn't matter)
-* [A Raspberry Pi Cobbler](https://www.adafruit.com/products/914)
+* [A Raspberry Pi Cobbler](https://www.adafruit.com/products/914) or [Pi Wedge](https://www.sparkfun.com/products/13717)
 * A USB mouse
 * A USB keyboard
 * A computer monitor with HDMI inputs
 * A power cord
+
+Once you get your RasPi up and running, you'll need to install the Rpi-GPIO library into python. You do that by running this on a terminal:
+
+```sudo apt-get install python-dev python-rpi.gpio```
