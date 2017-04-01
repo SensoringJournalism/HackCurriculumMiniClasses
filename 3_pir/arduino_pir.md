@@ -12,6 +12,7 @@ Gather your materials. You will need your Arduino, passive infrared sensor, and 
 
 **STEP 2** 
 
+<!--Maybe use pin numbers instead?-->
 Lay the Arduino so you can read the input labels. Find one GND (Ground) input and the 5V (five volt) on the left column of inputs. Find the _TX -> 1_ on the right column of inputs.
 
 Find the VCC, GND and OUT ports on the passive infrared sensor.
@@ -19,13 +20,15 @@ Find the VCC, GND and OUT ports on the passive infrared sensor.
 
 **STEP 3** 
 
+<!--Maybe use pin numbers instead?-->
+
 Usually, black jumper wires are for grounding. Plug one end of your black jumper into the GND port on the passive infrared sensor, and plug the other end into the GND port on the left column of inputs on your Arduino. 
 
 Usually, red jumper wires are for power. Plug one end of your red jumper into the VCC port on the passive infrared sensor, and plug the other end into the 5V input on the left column of inputs on your Arduino.
 
 Usually, yellow jumper wires are for everything else. Plug one end of your yellow jumper into the OUT port on the passive infrared sensor, and plug the other end into the _TX -> 1_ input on the right column of inputs on your Arduino.  
 
-**STEP 3** 
+**STEP 4** 
 
 Open your Arduino IDE. Plug your Arduino into your computer. Verify and upload this code:
 
@@ -66,9 +69,40 @@ void loop(){
     }
   }
 }
- ``` 
+```
+ 
+**STEP 5** 
 
+If all goes well, the passive infrared sensor should light up red when you pass your hand in front of it, and the Arduino should log "Motion detected!" to the console.
 
+<!--Do I call it a console?--> 
+
+###Why did this work?###
+The first code block tells the Arduino what kind of input and output to expect from each pin number. The LED is pin 13. The PIR sensor is pin 2. The Arduino assumes that the level of infrared activity will be low. The code also creates a global variable in which to store the input value.
+
+```
+int ledPin = 13;                // choose the pin for the LED
+int inputPin = 2;               // choose the input pin (for PIR sensor)
+int pirState = LOW;             // we start, assuming no motion detected
+int val = 0;                    // variable for reading the pin status
+```
+
+The second code block tells the Arduino what to expect as input and ouput:
+
+<!--What does Serial.begin(9600); do?-->
+
+```
+void setup() {
+  pinMode(ledPin, OUTPUT);      // declare LED as output
+  pinMode(inputPin, INPUT);     // declare sensor as input
+ 
+  Serial.begin(9600);
+}
+```
+
+The loop below is the action the Arduino takes. First, the Arduino reads the input from the passive infrared sensor. If the input is HIGH, 
+
+<!--I need help understanding this loop. Shouldn't the Arduino print "Motion Detected" if the input changes from low to high, instead of high to low?-->
 
  
 
@@ -78,7 +112,7 @@ void loop(){
 What if we just wanted to know what the temperature is when someone walks in the room? We can combine our temperature sensor and our PIR sensor. And we can merge the code. 
 
 
-```
+
 ```
 #include <dht.h>
 
@@ -147,5 +181,4 @@ void loop()
     }
   }
 }
-```
 ```
