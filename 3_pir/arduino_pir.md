@@ -12,21 +12,18 @@ Gather your materials. You will need your Arduino, passive infrared sensor, and 
 
 **STEP 2** 
 
-<!--Maybe use pin numbers instead?-->
-Lay the Arduino so you can read the input labels. Find one GND (Ground) input and the 5V (five volt) on the left column of inputs. Find the _TX -> 1_ on the right column of inputs.
+Lay the Arduino so you can read the input labels. Find a GND (Ground) input and the 5V (five volt) on the left column of inputs. Find input _2_ on the right column of inputs.
 
-Find the VCC, GND and OUT ports on the passive infrared sensor.
+
+Find the VCC, GND and OUT ports on the passive infrared sensor. 
   
-
 **STEP 3** 
-
-<!--Maybe use pin numbers instead?-->
 
 Usually, black jumper wires are for grounding. Plug one end of your black jumper into the GND port on the passive infrared sensor, and plug the other end into the GND port on the left column of inputs on your Arduino. 
 
-Usually, red jumper wires are for power. Plug one end of your red jumper into the VCC port on the passive infrared sensor, and plug the other end into the 5V input on the left column of inputs on your Arduino.
+Usually, red jumper wires are for power. Plug one end of your red jumper into the VCC (or 5V) port on the passive infrared sensor, and plug the other end into the 5V input on the left column of inputs on your Arduino.
 
-Usually, yellow jumper wires are for everything else. Plug one end of your yellow jumper into the OUT port on the passive infrared sensor, and plug the other end into the _TX -> 1_ input on the right column of inputs on your Arduino.  
+Usually, yellow jumper wires are for everything else. Plug one end of your yellow jumper into the OUT port on the passive infrared sensor, and plug the other end into input _2_ on the right column of inputs on your Arduino.  
 
 **STEP 4** 
 
@@ -73,12 +70,10 @@ void loop(){
  
 **STEP 5** 
 
-If all goes well, the passive infrared sensor should light up red when you pass your hand in front of it, and the Arduino should log "Motion detected!" to the console.
-
-<!--Do I call it a console?--> 
+If all goes well, the passive infrared sensor should light up red when you pass your hand in front of it, and the Arduino should log "Motion detected!" to the serial monitor.
 
 ###Why did this work?###
-The first code block tells the Arduino what kind of input and output to expect from each pin number. The LED is pin 13. The PIR sensor is pin 2. The Arduino assumes that the level of infrared activity will be low. The code also creates a global variable in which to store the input value.
+The first code block tells the Arduino what kind of input and output to expect from each pin number. The LED is pin 13. The PIR sensor is pin 2. The Arduino sets the initial/default reading for the PIR sensor to  ```LOW;```. If the sensor picks up infrared activity, its value changes to ```pirState = HIGH;``` and then flicks back to its initial/default of ```pirState = LOW;```. The code also creates a global variable in which to store the input value ```val = 0;```.  
 
 ```
 int ledPin = 13;                // choose the pin for the LED
@@ -100,7 +95,55 @@ void setup() {
 }
 ```
 
-The loop below is the action the Arduino takes. First, the Arduino reads the input from the passive infrared sensor. If the input is HIGH, 
+We only want to print changes in the state of the PIR sensor. The sensor is set to ```LOW``` initially/as a default. If that goes unchanged, the sensor picks up no infrared activity, the loop goes down to the nested ```else``` loop. 
+
+```
+else {
+    digitalWrite(ledPin, LOW); // turn LED OFF
+    if (pirState == HIGH){
+      // we have just turned of
+      Serial.println("Motion ended!");
+      // We only want to print on the output change, not state
+      pirState = LOW;
+    }
+```
+
+If that loop senses no change, that the sensor sensed nothing, the whole loop starts over. 
+
+We set the initial (and default) sensor setting to ```LOW```. When something happens, the sensor flicks on to ```HIGH``` and then back to ```LOW```. If the loop picks up a change from the initial ```LOW``` state, if it picks up ```HIGH```, then the loop checks if the sensor has flicked back on to ```LOW```, if so, motion has been detected and we print to the serial monitor. 
+
+```
+void loop(){
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {            // check if the input is HIGH
+    digitalWrite(ledPin, HIGH);  // turn LED ON
+    if (pirState == LOW) {
+      // we have just turned on
+      Serial.println("Motion detected!");
+      // We only want to print on the output change, not state
+      pirState = HIGH;
+    }
+  }
+```
+ 
+
+We then assign a state of ```HIGH``` to the serial monitor and the loop repeats. We don't want to detect ongoing movement, so the loop repeats and prints nothing as long as nothing causes the new set value of ```HIGH``` to change.
+
+If there is a change, however, and an absence of activity causes the reading to flick over to ```LOW```, the ```ELSE``` loop takes over and reads the change from the new initial/default ```HIGH``` to ```LOW``` and back to ```HIGH```, it prints the change, and sets the default back to ```LOW```.
+
+```
+else {
+    digitalWrite(ledPin, LOW); // turn LED OFF
+    if (pirState == HIGH){
+      // we have just turned of
+      Serial.println("Motion ended!");
+      // We only want to print on the output change, not state
+      pirState = LOW;
+    }
+  }
+} 
+``` 
+
 
 <!--I need help understanding this loop. Shouldn't the Arduino print "Motion Detected" if the input changes from low to high, instead of high to low?-->
 
@@ -181,4 +224,62 @@ void loop()
     }
   }
 }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We only want to print changes in the state of the PIR sensor. The sensor is set to LOW. If that goes unchanged, the PIR sensor picks up nothing, the loop goes down to the nested ELSE loop. 
+
+```
+else {
+    digitalWrite(ledPin, LOW); // turn LED OFF
+    if (pirState == HIGH){
+      // we have just turned of
+      Serial.println("Motion ended!");
+      // We only want to print on the output change, not state
+      pirState = LOW;
+    }
+```
+
+If that loop senses no change, that the PIR sensor sensed nothing, the whole loop starts over. 
+
+We set the initial (and default) sensor setting to LOW. When something happens, the sensor flicks on to HIGH and then back to LOW. If the loop picks up a change from the initial LOW state, if it picks up HIGH, then the loop checks if the sensor has flicked back on to LOW, if so, motion has been detected and we print to the serial monitor. We then assign a state of HIGH to the serial monitor and the loop repeats. We don't want to detect ongoing movement, so the loop repeats and prints nothing as long as nothing causes the new set value of HIGH to change.
+
+If there is a change, however, and an absence of activity causes the reading to flick over to LOW, the ELSE loop takes over and reads the change from the new initial/default HIGH to LOW and back to HIGH, it prints the change, and sets the default back to low.  
+
+```
+void loop(){
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {            // check if the input is HIGH
+    digitalWrite(ledPin, HIGH);  // turn LED ON
+    if (pirState == LOW) {
+      // we have just turned on
+      Serial.println("Motion detected!");
+      // We only want to print on the output change, not state
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(ledPin, LOW); // turn LED OFF
+    if (pirState == HIGH){
+      // we have just turned of
+      Serial.println("Motion ended!");
+      // We only want to print on the output change, not state
+      pirState = LOW;
+    }
+
 ```
