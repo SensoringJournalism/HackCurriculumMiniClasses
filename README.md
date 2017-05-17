@@ -7,12 +7,13 @@ In this repository will be exercises covering blinking lights, passive infrared 
 
 These are the mini-courses planned for each sensor and platform. Progress will be noted with an X for which ones are done. 
 
-|File|Arduino|Particle|RasPi|
-|----|-------|-----|-----|
-|Basics|||||
-|Blink|X|X|X|
-|Temperature||||
-|PIR||||
-|Light||||
-|GPS||||
-|Air||||
+|No.|Topic|Arduino|Particle|RasPi|
+|---|----|-------|-----|-----|
+|0|Basics|X|X|X|
+|1|Blink|X|X|X|
+|2|Temperature|X||
+|3|PIR|X|||
+|4|Light|||
+|5|GPS|||
+|6|Air|||
+|7|Data logging|||

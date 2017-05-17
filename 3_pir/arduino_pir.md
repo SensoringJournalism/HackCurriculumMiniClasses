@@ -72,7 +72,7 @@ void loop(){
 
 If all goes well, the passive infrared sensor should light up red when you pass your hand in front of it, and the Arduino should log "Motion detected!" to the serial monitor.
 
-###Why did this work?###
+### Why did this work?
 The first code block tells the Arduino what kind of input and output to expect from each pin number. The LED is pin 13. The PIR sensor is pin 2. The Arduino sets the initial/default reading for the PIR sensor to  ```LOW;```. If the sensor picks up infrared activity, its value changes to ```pirState = HIGH;``` and then flicks back to its initial/default of ```pirState = LOW;```. The code also creates a global variable in which to store the input value ```val = 0;```.  
 
 ```
@@ -125,7 +125,6 @@ void loop(){
     }
   }
 ```
- 
 
 We then assign a state of ```HIGH``` to the serial monitor and the loop repeats. We don't want to detect ongoing movement, so the loop repeats and prints nothing as long as nothing causes the new set value of ```HIGH``` to change.
 
@@ -144,16 +143,9 @@ else {
 } 
 ``` 
 
-
-<!--I need help understanding this loop. Shouldn't the Arduino print "Motion Detected" if the input changes from low to high, instead of high to low?-->
-
- 
-
-
-##STRETCH GOAL: Combine two sensors##
+## STRETCH GOAL: Combine two sensors
 
 What if we just wanted to know what the temperature is when someone walks in the room? We can combine our temperature sensor and our PIR sensor. And we can merge the code. 
-
 
 
 ```
@@ -225,24 +217,6 @@ void loop()
   }
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 We only want to print changes in the state of the PIR sensor. The sensor is set to LOW. If that goes unchanged, the PIR sensor picks up nothing, the loop goes down to the nested ELSE loop. 
 
 ```
