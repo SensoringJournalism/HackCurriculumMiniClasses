@@ -11,6 +11,7 @@ The exercises that make up this mini-course in sensors for journalism will use t
 * Random LEDs. Color or size doesn't matter
 * A breadboard
 * An RHT03 temperature and humidity sensor
+* A ChronoDot v2.1
 
 ## Arduino
 
