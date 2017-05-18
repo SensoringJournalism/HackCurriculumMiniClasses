@@ -20,6 +20,8 @@ The wiring for the ChronoDot is quite simple. On the right side (if the battery 
 * Yellow wire from SDA to Analog port 4 (A4) on the Arduino.
 
 Unlike other sensors, the ports really matter here because the ChronoDot is an IC2/TWI interface, which means SDA is always going to be A4 on the Arduino Uno and SCL is A5.  
+
+![arduino-time-1](../images/arduino-time-1.jpg)
   
 **STEP 3** 
 
@@ -87,6 +89,17 @@ void loop() {
 So this requires a little more setup, because it uses a different interface than other sensors we've used before. If you want to know more about IC2/TWI, [you can get more here](https://www.arduino.cc/en/reference/wire). So the setup does three things initially: Starts reading the serial data, starts up the wire library and it's reading capabilities, and starts up the real time clock. Then it checks if the clock is running. After that, it synchronizes the time from when you compiled the code and the time on the Chronodot. If this is the first time you're running the Chronodot, this code will make it so you don't have to manually set it, which is nice. 
 
 The second part is pretty simple, if a little code inefficient. It grabs each piece of the date and time and prints them with the / and : bits wedged in there to make the formatting nice and easy. 
+
+Verify your code, run it and open the serial monitor. If all has worked, you should see something like this: 
+
+```
+Current time: 5/18/2017 18:49:30
+Current time: 5/18/2017 18:49:40
+Current time: 5/18/2017 18:49:50
+Current time: 5/18/2017 18:50:0
+Current time: 5/18/2017 18:50:10
+Current time: 5/18/2017 18:50:20
+Current time: 5/18/2017 18:50:30```
 
 ### Why did this work? 
 

@@ -13,7 +13,7 @@ These are the mini-courses planned for each sensor and platform. Progress will b
 |1|Blink|X|X|X|
 |2|Temperature|X||
 |3|PIR|X|||
-|4|Time|||
+|4|Time|X||
 |5|GPS|||
 |6|Air|||
 |7|Data logging|||
