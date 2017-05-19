@@ -12,6 +12,8 @@ The exercises that make up this mini-course in sensors for journalism will use t
 * A breadboard
 * An RHT03 temperature and humidity sensor
 * A ChronoDot v2.1
+* An [Adafruit Ultimate GPS Breakout](https://learn.adafruit.com/adafruit-ultimate-gps) board
+* A u.FL connector for a GPS antenna
 
 ## Arduino
 
