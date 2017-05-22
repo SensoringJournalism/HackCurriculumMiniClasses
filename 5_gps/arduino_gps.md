@@ -49,8 +49,17 @@ Second issue, is if you aren't getting satellites -- like if you are inside -- t
 
 The giveaway is the line that says Fix: 0 quality 0. That means you have no satellite fixes, so the quality of the fix is zero. 
 
+If you do venture outside, and you've got your antenna set up correctly, you'll see something like this:
+
+![arduino-gps-5](../images/arduino-gps-5.png)
+
+
 ### Why did this work? 
 
+The wiring in this case is simple -- you're using TX to send data TO the sensor and RX to receive data FROM the sensor. What isn't so simple is the code. The GPS chip receives a LOT of data, so the code written by Adafruit is pretty verbose. It does a lot of stuff we don't really need it to do. So what if we wanted to just cut it down to the minimum -- what if we just wanted to see the latitude and longitude in decimal degress? How do we do that? 
 
-## STRETCH GOAL: 
+
+## STRETCH GOAL:
+
+Simplify the code.  
 
