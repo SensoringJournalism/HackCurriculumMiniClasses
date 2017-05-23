@@ -20,9 +20,9 @@ Wiring is relatively simple. There's only three wires, and the wiring harness th
 * Connect a black jumper wire from the black wire on the wiring harness to a GND pin on the Arduino. 
 * Connect a yellow jumper from the yellow wire on the wiring harness to Digital Pin 8 (D8) on the Arduino.
 
-![arduino-gps-1](../images/arduino-gps-1.jpg)
+![arduino-air-1](../images/arduino-air-1.jpg)
 
-![arduino-gps-2](../images/arduino-gps-2.jpg)
+![arduino-air-2](../images/arduino-air-2.jpg)
   
 **STEP 3** 
 
@@ -63,7 +63,7 @@ void loop() {
 
   if ((millis()-starttime) >= sampletime_ms) // if the sample time == 30s
   {
-    ratio = lowpulseoccupancy/(sampletime_ms*10.0);  // Integer percentage 0=&gt;100
+    ratio = lowpulseoccupancy/(sampletime_ms*10.0);  // Integer percentage 0 => 100
     concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; // using spec sheet curve
     Serial.print("concentration = ");
     Serial.print(concentration);
@@ -78,14 +78,13 @@ void loop() {
  
 **STEP 4** 
 
+Pull up the serial monitor and you'll see, every 30 seconds, a new reading comes in. You'll note that the most common reading is .62 pcs/0.01cf -- that's essentially zero. If you blow into it, you'll get some big numbers. And if you leave it run for a while, you'll get some spiky numbers, depending on your environment. My workshop in my house, where I made this tutorial, isn't exactly the cleanest place in the house, so it can be dusty. 
+
+![arduino-air-3](../images/arduino-air-3.png)
+
 
 ### Why did this work? 
  
+If you look at the code, most of it is defining a series of variables that will get overwritten in the loop. The setup is pretty plain -- the only thing you won't see in every other tutorial on Arduino stuff is the getting of the time in milliseconds. 
 
-## STRETCH GOAL:
-
-
-
-
-
-
+In the loop, the most important part is the concentration -- that's the part that has physical meaning. The variable is a formula based on the sensor's capabilities and the curve of the graph representing those capabilities. So the formula calculates how much dust is in the room based on the sensor's value (which is represented by `ratio` in the formula) and a set of constants.
