@@ -11,9 +11,10 @@ The exercises that make up this mini-course in sensors for journalism will use t
 * Random LEDs. Color or size doesn't matter
 * A breadboard
 * An RHT03 temperature and humidity sensor
-* A ChronoDot v2.1
+* [A ChronoDot v2.1](https://www.adafruit.com/product/255)
 * An [Adafruit Ultimate GPS Breakout](https://learn.adafruit.com/adafruit-ultimate-gps) board
 * A u.FL connector for a GPS antenna
+* [A Grove Dust Sensor](http://wiki.seeed.cc/Grove-Dust_Sensor/)
 
 ## Arduino
 
