@@ -56,10 +56,82 @@ If you do venture outside, and you've got your antenna set up correctly, you'll 
 
 ### Why did this work? 
 
-The wiring in this case is simple -- you're using TX to send data TO the sensor and RX to receive data FROM the sensor. What isn't so simple is the code. The GPS chip receives a LOT of data, so the code written by Adafruit is pretty verbose. It does a lot of stuff we don't really need it to do. So what if we wanted to just cut it down to the minimum -- what if we just wanted to see the latitude and longitude in decimal degress? How do we do that? 
+The wiring in this case is simple -- you're using TX to send data TO the sensor and RX to receive data FROM the sensor. What isn't so simple is the code. The GPS chip receives a LOT of data, so the code written by Adafruit is pretty verbose. It does a lot of stuff we don't really need it to do -- it's an example designed to give you an idea of what all the library and the sensor can do. So what if we wanted to just cut it down to the minimum -- what if we just wanted to see the date, the  latitude and longitude in decimal degress? How do we do that? 
 
 
 ## STRETCH GOAL:
 
-Simplify the code.  
+When it comes to combining other people's code and other people's ideas in code, there's a couple of things you need to think about. First -- do you have all the right libraries imported? Second -- is the code you are combining reading the right pins? Third -- if you're deleting things, are you deleting things that are getting referenced later? Did you delete something you need?
 
+So to thin things and make it more readable, we're going to combine ideas in two different examples from Adafruit: the `GPS_HardwareSerial_Parsing` example and the `parsing` example we used before. Part of the verbosity -- and difference from what we've been doing -- in the parsing example is that it uses interrupt-based code instead of the loop based code we've been using all along. 
+
+So we're going to move all of the GPS reading stuff into the loop and we're going to simplify the output. 
+
+First, we need to set things up: Import libraries, set up the pins, tell the library what we're reading and setting the GPSECHO to false.
+
+```
+#include <Adafruit_GPS.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(3, 2);
+
+Adafruit_GPS GPS(&mySerial);
+#define GPSECHO false
+
+uint32_t timer = millis();
+
+```
+Now the setup, which is very familiar. We set the serial read at 115200 and the GPS read at 9600. The rest are commands we need to get the GPS set up and running. 
+
+```
+void setup()
+{
+  Serial.begin(115200);
+  GPS.begin(9600);
+  GPS.sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+  GPS.sendCommand(PMTK_SET_NMEA_UPDATE_1HZ); // 1 Hz update rate
+  GPS.sendCommand(PGCMD_ANTENNA);
+  delay(1000);
+}
+
+```
+
+Now lets loop what we need. Most of this comes from the `GPS_HardwareSerial_Parsing` example, with comments and a few Serial.prints removed. I've narrowed it down to just the data we want: The date and time, the location in decimal degrees and the number of satellites, which is a proxy for the quality of the location. One major differences is I've extended the reading time to 10 seconds instead of two. 
+
+```
+void loop() 
+{
+  char c = GPS.read();
+  if (GPSECHO)
+    if (c) Serial.print(c);
+  if (GPS.newNMEAreceived()) {
+    if (!GPS.parse(GPS.lastNMEA())) 
+      return; 
+  }
+
+  if (timer > millis()) timer = millis();
+     
+  if (millis() - timer > 10000) {
+    timer = millis(); // reset the timer
+    Serial.print("\nTime: ");
+    Serial.print(GPS.hour, DEC); Serial.print(':');
+    Serial.print(GPS.minute, DEC); Serial.print(':');
+    Serial.print(GPS.seconds, DEC); Serial.print('.');
+    Serial.println(GPS.milliseconds);
+    Serial.print("Date: ");
+    Serial.print(GPS.day, DEC); Serial.print('/');
+    Serial.print(GPS.month, DEC); Serial.print("/20");
+    Serial.println(GPS.year, DEC);
+    if (GPS.fix) {
+      Serial.print("Location: ");
+      Serial.print(GPS.latitudeDegrees, 6); Serial.print(GPS.lat);
+      Serial.print(", ");
+      Serial.print(GPS.longitudeDegrees, 6); Serial.println(GPS.lon);
+      Serial.print("Satellites: "); Serial.println((int)GPS.satellites);
+    }
+  }
+} 
+
+```
+
+Now, with GPS reading in the loop, we can combine this code with other code we've written to read a sensor and, as long as they aren't using the same pins, they'll behave similarly. 

@@ -14,6 +14,7 @@ These are the mini-courses planned for each sensor and platform. Progress will b
 |2|Temperature|X||
 |3|PIR|X|||
 |4|Time|X||
-|5|GPS|||
-|6|Air|||
+|5|GPS|X||
+|6|Air|X||
 |7|Data logging|||
+|8|External power|||
