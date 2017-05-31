@@ -75,11 +75,11 @@ Open the [Particle Build IDE](https://build.particle.io).
 
 Click create new app. Give your app a name (I called my ParticleTemp). 
 
-Copy and paste this code:
+Click libraries, search for DHT and add the Arduino DHT library. It will insert a piece of code at the top of your app that looks like `#include <Adafruit_DHT.h>`
+
+Then, after that added code, copy and paste this code:
 
 ```
-#include <Adafruit_DHT.h>
-
 #define DHTPIN 5
 #define DHTTYPE DHT22
 
